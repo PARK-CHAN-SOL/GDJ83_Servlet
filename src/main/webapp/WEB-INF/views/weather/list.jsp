@@ -13,6 +13,7 @@
 	<table class="tbl">
 		<thead>
 			<tr>
+				<th>Num</th>
 				<th>City</th>
 				<th>Temperature</th>
 				<th>Status</th>
@@ -23,7 +24,9 @@
 		<tbody>
 			<c:forEach items="${requestScope.list}" var="wDTO">
 				<tr>
-					<td>${pageScope.wDTO.city}</td>
+					<td>${pageScope.wDTO.num}</td>
+					<!-- 실제 경로가 아니라 주소창에 있는 경로를 참조 -->
+					<td><a href="./detail">${pageScope.wDTO.city}</a></td>
 					<td>${pageScope.wDTO.gion}</td>
 					<td>${pageScope.wDTO.status}</td>
 					<td>${pageScope.wDTO.humidity}</td>

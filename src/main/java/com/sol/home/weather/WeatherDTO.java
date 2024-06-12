@@ -1,11 +1,18 @@
 package com.sol.home.weather;
 
 public class WeatherDTO {
+	private long num;
 	private String city;
 	private double gion;
 	private String status;
 	private int humidity;
 	
+	public long getNum() {
+		return num;
+	}
+	public void setNum(long num) {
+		this.num = num;
+	}
 	public String getCity() {
 		return city;
 	}
