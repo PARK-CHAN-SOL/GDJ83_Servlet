@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+.tbl {
+	border: 2px solid black;
+	/* 테두리간 간격 조정 */
+	border-spacing: 0;
+	/* 선이 겹칠 경우 */
+	border-collapse: collapse;
+	/* 60%는 부모기준 비례 */
+	width: 60%;
+	/* body가 부모라면 height는 % 못씀 body는 height 무한대
+            height: 50%; */
+    margin: 10px auto;
+}
+
+.tbl td, .tbl th {
+	border: 2px dashed red;
+	height: 70px;
+	text-align: center;
+	font-size: x-large;
+} 
