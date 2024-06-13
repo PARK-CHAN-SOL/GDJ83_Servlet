@@ -1,5 +1,6 @@
 package com.sol.home.weather;
 
+import java.net.http.HttpRequest;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,8 +18,12 @@ public class WeatherController {
 		Action action = new Action();
 		action.setFlag(true);
 		action.setPath("/WEB-INF/views/index.jsp");
+
+		// method 형식
+		String method = request.getMethod().toUpperCase();
+
 		if (spltUri.length > 2) {
-			
+
 			if (spltUri[2].equals("list")) {
 				// WeatherService 파싱해서
 				// getWeathers 실행
@@ -26,28 +31,42 @@ public class WeatherController {
 				List<WeatherDTO> wDTOs = ws.getWeathers();
 				request.setAttribute("list", wDTOs);
 				action.setPath("/WEB-INF/views/weather/list.jsp");
-				
+
 			} else if (spltUri[2].equals("add")) {
-				action.setPath("/WEB-INF/views/weather/add.jsp");
-				
+				if (method.equals("POST")) {
+					String city = request.getParameter("city");
+					double gion = Double.parseDouble(request.getParameter("gion"));
+					String status = request.getParameter("status");
+					int humidity = Integer.parseInt(request.getParameter("humidity"));
+					WeatherDTO wDTO = new WeatherDTO();
+					wDTO.setCity(city);
+					wDTO.setGion(gion);
+					wDTO.setStatus(status);
+					wDTO.setHumidity(humidity);
+					ws.add(wDTO);
+					action.setPath("/WEB-INF/views/weather/add.jsp");
+				} else {
+					action.setPath("/WEB-INF/views/weather/add.jsp");					
+				}
+
 			} else if (spltUri[2].equals("delete")) {
 				action.setPath("/WEB-INF/views/weather/delete.jsp");
-				
+
 			} else if (spltUri[2].equals("detail")) {
 				//
 				String num = request.getParameter("num");
 				WeatherDTO wDTO = new WeatherDTO();
 				wDTO.setNum(Long.parseLong(num));
 				wDTO = ws.getDetail(wDTO);
-				
-				if(wDTO != null) {
+
+				if (wDTO != null) {
 					request.setAttribute("wDTO", wDTO);
-					action.setPath("/WEB-INF/views/weather/detail.jsp");					
+					action.setPath("/WEB-INF/views/weather/detail.jsp");
 				} else {
 					request.setAttribute("message", "정보가 없습니다");
 					action.setPath("/WEB-INF/views/commons/message.jsp");
 				}
-				
+
 			} else {
 
 			}

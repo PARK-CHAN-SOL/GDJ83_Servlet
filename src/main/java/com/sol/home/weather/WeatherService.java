@@ -2,7 +2,6 @@ package com.sol.home.weather;
 
 import java.util.List;
 
-
 public class WeatherService {
 
 	private WeatherDAO wDAO = null;
@@ -34,6 +33,15 @@ public class WeatherService {
 		}
 		
 		return wDTO;
+	}
+	
+	public void add(WeatherDTO wDTO) {
+		try {
+			wDAO.add(wDTO);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

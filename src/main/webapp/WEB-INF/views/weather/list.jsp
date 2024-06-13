@@ -34,5 +34,8 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<div>
+		<a href="./add">날씨정보추가</a>
+	</div>
 </body>
 </html>

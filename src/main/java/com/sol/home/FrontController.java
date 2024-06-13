@@ -35,6 +35,9 @@ public class FrontController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		
 		System.out.println("doGet(...) 실행됨");
 		String uri = request.getRequestURI();
 		String method = request.getMethod();
