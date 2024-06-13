@@ -23,16 +23,20 @@
 			<tr>
 				<th>번호</th>
 				<th class="tname">이름</th>
-				<th>평균</th>
+				<th>국어</th>
+				<th>영어</th>
+				<th>수학</th>
 			</tr>
 		</thead>
 
 		<tbody>
-			<c:forEach items="${requestScope.list}" var="student">
+			<c:forEach items="${requestScope.list}" var="sDTO">
 				<tr>
-					<td>${pageScope.student.num}</td>
-					<td class="tname">${pageScope.student.name}</td>
-					<td>${pageScope.student.avg}</td>
+					<td>${pageScope.sDTO.num}</td>
+					<td class="tname"><a href="./detail?num=${pageScope.sDTO.num}">${pageScope.sDTO.name}</a></td>
+					<td>${pageScope.sDTO.kor}</td>
+					<td>${pageScope.sDTO.eng}</td>
+					<td>${pageScope.sDTO.math}</td>
 				</tr>
 				<!-- <hr> -->
 				<!-- 수평선 하나 긋기 -->

@@ -34,7 +34,19 @@ public class WeatherController {
 				action.setPath("/WEB-INF/views/weather/delete.jsp");
 				
 			} else if (spltUri[2].equals("detail")) {
-				action.setPath("/WEB-INF/views/weather/detail.jsp");
+				//
+				String num = request.getParameter("num");
+				WeatherDTO wDTO = new WeatherDTO();
+				wDTO.setNum(Long.parseLong(num));
+				wDTO = ws.getDetail(wDTO);
+				
+				if(wDTO != null) {
+					request.setAttribute("wDTO", wDTO);
+					action.setPath("/WEB-INF/views/weather/detail.jsp");					
+				} else {
+					request.setAttribute("message", "정보가 없습니다");
+					action.setPath("/WEB-INF/views/commons/message.jsp");
+				}
 				
 			} else {
 

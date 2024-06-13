@@ -38,4 +38,20 @@ public class WeatherDAO {
 		br.close();
 		return wDTOs;
 	}
+	
+	// detail
+	public WeatherDTO getDetail(WeatherDTO wDTO) throws Exception {
+		List<WeatherDTO> wDTOs = this.getWeathers();
+		
+		WeatherDTO result = null;
+		
+		for(WeatherDTO wDTOTmp : wDTOs) {
+			if(wDTO.getNum() == wDTOTmp.getNum()) {
+				result = wDTOTmp;
+				break;
+			}
+		}
+		
+		return result;
+	}
 }

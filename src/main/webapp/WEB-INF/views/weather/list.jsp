@@ -26,7 +26,7 @@
 				<tr>
 					<td>${pageScope.wDTO.num}</td>
 					<!-- 실제 경로가 아니라 주소창에 있는 경로를 참조 -->
-					<td><a href="./detail">${pageScope.wDTO.city}</a></td>
+					<td><a href="./detail?num=${pageScope.wDTO.num}">${pageScope.wDTO.city}</a></td>
 					<td>${pageScope.wDTO.gion}</td>
 					<td>${pageScope.wDTO.status}</td>
 					<td>${pageScope.wDTO.humidity}</td>

@@ -1,6 +1,6 @@
 package com.sol.home.student;
 
-import java.util.LinkedList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,28 +35,33 @@ public class StudentController {
 
 		if (spltUri.length > 2) {
 			if (spltUri[2].equals("list")) {
-				LinkedList<Student> students = (LinkedList<Student>) this.studentService.getStudents();
-				request.setAttribute("list", students);
-				action.setPath("/WEB-INF/views/student/list.jsp");
+				List<StudentDTO> sDTOs = this.studentService.getStudents();
+				if (sDTOs != null) {
+					request.setAttribute("list", sDTOs);
+					action.setPath("/WEB-INF/views/student/list.jsp");
+				} else {
+					request.setAttribute("messages", "정보가 없습니다");
+					action.setPath("/WEB-INF/views/commons/messages.jsp");
+				}
 
 			} else if (spltUri[2].equals("add")) {
 				if (method.toUpperCase().equals("POST")) {
-					Student student = new Student();
+					StudentDTO sDTO = new StudentDTO();
 					String name = request.getParameter("name");
 					int num = Integer.parseInt(request.getParameter("num"));
 					double avg = Double.parseDouble(request.getParameter("avg"));
 					System.out.println(name + num + avg);
-					student.setName(name);
-					student.setNum(num);
-					student.setAvg(avg);
+					sDTO.setName(name);
+					sDTO.setNum(num);
+					sDTO.setAvg(avg);
 
 					System.out.println(request.getParameter("ch"));
 					System.out.println(request.getParameter("mobile"));
-					
+
 					for (String ch2 : request.getParameterValues("ch2")) {
 						System.out.println(ch2);
 					}
-					
+
 					System.out.println(request.getParameter("textArea"));
 
 					action.setFlag(false);
@@ -69,9 +74,16 @@ public class StudentController {
 //				action.setPath("/WEB-INF/views/student/delete.jsp");
 
 			} else if (spltUri[2].equals("detail")) {
-				Student student = this.studentService.makeStudent();
-				request.setAttribute("student", student);
-				action.setPath("/WEB-INF/views/student/detail.jsp");
+				StudentDTO sDTO = new StudentDTO();
+				sDTO.setNum(Integer.parseInt(request.getParameter("num")));
+				sDTO = studentService.getDetail(sDTO);
+				if(sDTO != null) {
+					request.setAttribute("sDTO", sDTO);
+					action.setPath("/WEB-INF/views/student/detail.jsp");					
+				} else {
+					request.setAttribute("messages", "정보가 없습니다");
+					action.setPath("/WEB-INF/views/commons/messages.jsp");
+				}
 
 			} else {
 
