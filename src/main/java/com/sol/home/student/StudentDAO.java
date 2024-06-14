@@ -67,5 +67,44 @@ public class StudentDAO {
 		}
 		return null;
 	}
+	
+	public void delete(StudentDTO sDTO) throws Exception{
+		List<StudentDTO> sDTOs = this.getStudents();
+		FileWriter fw = new FileWriter(file,false);
+		StringBuffer sb = new StringBuffer();
+		for(StudentDTO sDTOtmp : sDTOs) {
+			if(sDTOtmp.getNum() == sDTO.getNum()) {
+				continue;
+			}
+			sb.append(sDTOtmp.getNum()).append(",").append(sDTOtmp.getName()).append(",")
+			.append(sDTOtmp.getKor()).append(",").append(sDTOtmp.getEng()).append(",").append(sDTOtmp.getMath()).append(",")
+			.append(sDTOtmp.getTotal()).append(",").append(sDTOtmp.getAvg()).append("\n");
+		}
+		fw.write(sb.toString());
+		fw.close();
+	}
+	
+	public void update(StudentDTO sDTO) throws Exception{
+		List<StudentDTO> sDTOs = this.getStudents();
+		FileWriter fw = new FileWriter(file,false);
+		int total = sDTO.getKor() + sDTO.getEng() + sDTO.getMath();
+		double avg = total / 3.0;
+		StringBuffer sb = new StringBuffer();
+		for(StudentDTO sDTOtmp : sDTOs) {
+			if(sDTOtmp.getNum() == sDTO.getNum()) {
+				sDTOtmp.setName(sDTO.getName());
+				sDTOtmp.setKor(sDTO.getKor());
+				sDTOtmp.setEng(sDTO.getEng());
+				sDTOtmp.setMath(sDTO.getMath());
+				sDTOtmp.setTotal(total);
+				sDTOtmp.setAvg(avg);
+			}
+			sb.append(sDTOtmp.getNum()).append(",").append(sDTOtmp.getName()).append(",")
+			.append(sDTOtmp.getKor()).append(",").append(sDTOtmp.getEng()).append(",").append(sDTOtmp.getMath()).append(",")
+			.append(sDTOtmp.getTotal()).append(",").append(sDTOtmp.getAvg()).append("\n");
+		}
+		fw.write(sb.toString());
+		fw.close();
+	}
 
 }

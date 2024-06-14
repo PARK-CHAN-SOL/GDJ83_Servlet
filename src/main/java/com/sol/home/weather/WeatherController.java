@@ -87,6 +87,8 @@ public class WeatherController {
 					wDTO.setStatus(request.getParameter("status"));
 					wDTO.setHumidity(Integer.parseInt(request.getParameter("humidity")));
 					ws.update(wDTO);
+					action.setPath("/weather/list");
+					action.setFlag(false);
 				} else {
 					WeatherDTO wDTO = new WeatherDTO();
 					wDTO.setNum(Long.parseLong(request.getParameter("num")));

@@ -41,4 +41,22 @@ public class StudentService {
 		}
 	}
 	
+	public void delete(StudentDTO sDTO) {
+		try {
+			sDAO.delete(sDTO);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void update(StudentDTO sDTO) {
+		try {
+			sDAO.update(sDTO);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }

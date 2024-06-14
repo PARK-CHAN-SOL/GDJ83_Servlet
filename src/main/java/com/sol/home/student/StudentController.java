@@ -27,7 +27,7 @@ public class StudentController {
 		// delete : 학생한명정보삭제
 		// detail : 한생한명정보출력
 		String uri = request.getRequestURI();
-		String method = request.getMethod();
+		String method = request.getMethod().toUpperCase();
 		String[] spltUri = uri.split("/");
 
 		Action action = new Action();
@@ -54,7 +54,7 @@ public class StudentController {
 					int kor = Integer.parseInt(request.getParameter("kor"));
 					int eng = Integer.parseInt(request.getParameter("eng"));
 					int math = Integer.parseInt(request.getParameter("math"));
-				
+
 					sDTO.setName(name);
 					sDTO.setNum(num);
 					sDTO.setKor(kor);
@@ -62,7 +62,7 @@ public class StudentController {
 					sDTO.setMath(math);
 
 					studentService.makeStudent(sDTO);
-					
+
 					action.setFlag(false);
 					action.setPath("./list");
 				} else {
@@ -70,20 +70,44 @@ public class StudentController {
 				}
 
 			} else if (spltUri[2].equals("delete")) {
-//				action.setPath("/WEB-INF/views/student/delete.jsp");
+				action.setPath("/student/list");
+				action.setFlag(false);
+				if (method.equals("POST")) {
+					StudentDTO sDTO = new StudentDTO();
+					sDTO.setNum(Long.parseLong(request.getParameter("num")));
+					studentService.delete(sDTO);
+				}
 
 			} else if (spltUri[2].equals("detail")) {
 				StudentDTO sDTO = new StudentDTO();
 				sDTO.setNum(Long.parseLong(request.getParameter("num")));
 				sDTO = studentService.getDetail(sDTO);
-				if(sDTO != null) {
+				if (sDTO != null) {
 					request.setAttribute("sDTO", sDTO);
-					action.setPath("/WEB-INF/views/student/detail.jsp");					
+					action.setPath("/WEB-INF/views/student/detail.jsp");
 				} else {
 					request.setAttribute("messages", "정보가 없습니다");
 					action.setPath("/WEB-INF/views/commons/messages.jsp");
 				}
 
+			} else if (spltUri[2].equals("update")) {
+				if (method.equals("GET")) {
+					StudentDTO sDTO = new StudentDTO();
+					sDTO.setNum(Long.parseLong(request.getParameter("num")));
+					sDTO = studentService.getDetail(sDTO);
+					request.setAttribute("sDTO", sDTO);
+					action.setPath("/WEB-INF/views/student/update.jsp");
+				} else {
+					StudentDTO sDTO = new StudentDTO();
+					sDTO.setNum(Long.parseLong(request.getParameter("num")));
+					sDTO.setName(request.getParameter("name"));
+					sDTO.setKor(Integer.parseInt(request.getParameter("kor")));
+					sDTO.setEng(Integer.parseInt(request.getParameter("eng")));
+					sDTO.setMath(Integer.parseInt(request.getParameter("math")));
+					studentService.update(sDTO);
+					action.setPath("/student/list");
+					action.setFlag(false);
+				}
 			} else {
 
 			}

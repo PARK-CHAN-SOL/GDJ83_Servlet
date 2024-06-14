@@ -20,5 +20,23 @@
 	<h3>${requestScope.sDTO.math}</h3>
 	<h3>${requestScope.sDTO.total}</h3>
 	<h3>${requestScope.sDTO.avg}</h3>
+	<form action="./delete" method="post" id="frm">
+		<input type="hidden" value="${requestScope.sDTO.num}" name="num">
+	</form>
+	<button id="del">DELETE</button>
+	<button id="up">UPDATE</button>
+	<script type="text/javascript">
+		const del = document.getElementById("del");
+		const frm = document.getElementById("frm");
+		const up = document.getElementById("up");
+		del.addEventListener("click", function() {
+			frm.submit();
+		});
+		up.addEventListener("click", function() {
+			frm.action = "./update";
+			frm.method = "get";
+			frm.submit();
+		});
+	</script>
 </body>
 </html>
