@@ -1,6 +1,5 @@
 package com.sol.home.weather;
 
-import java.net.http.HttpRequest;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,9 +43,13 @@ public class WeatherController {
 					wDTO.setStatus(status);
 					wDTO.setHumidity(humidity);
 					ws.add(wDTO);
-					action.setPath("/WEB-INF/views/weather/add.jsp");
+					// 셋 다 동일
+					// action .setPath("./list")
+					// action.setPath("list")
+					action.setPath("/weather/list");
+					action.setFlag(false);
 				} else {
-					action.setPath("/WEB-INF/views/weather/add.jsp");					
+					action.setPath("/WEB-INF/views/weather/add.jsp");
 				}
 
 			} else if (spltUri[2].equals("delete")) {
