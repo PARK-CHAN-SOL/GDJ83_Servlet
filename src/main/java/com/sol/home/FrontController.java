@@ -65,7 +65,7 @@ public class FrontController extends HttpServlet {
 				action = wc.start(request);
 
 			}
-
+			System.out.println( request.getRemoteAddr() );
 			if (action.isFlag()) {
 				RequestDispatcher view = request.getRequestDispatcher(action.getPath());
 				view.forward(request, response);

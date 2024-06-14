@@ -16,44 +16,24 @@
 	<!-- 파라미터의 이름은 setter의 이름과 동일하게 맞춰주세요 -->
 	<form action="/student/add" method="post">
 		<div>
-			<label for="num">번호</label>
-			<input type="number" name="num" id="num">
-		</div>
-
-		<div>
 			<label for="name">이름</label>
 			<input type="text" name="name" id="name">
 		</div>
 
 		<div>
-			<label for="avg">평균</label>
-			<input type="number" name="avg" id="avg">
+			<label for="kor">국어</label>
+			<input type="number" name="kor" id="kor">
 		</div>
 		
 		<div>
-			<label></label>
-			<input type="radio" name="ch" value="여성">
-			<input type="radio" name="ch" value="남성">
+			<label for="eng">영어</label>
+			<input type="number" name="eng" id="eng">
 		</div>
-		
 		<div>
-			<select name="mobile">
-				<option>KT</option>
-				<option>SKT</option>
-				<option>LG</option>
-			</select>
+			<label for="math">수학</label>
+			<input type="number" name="math" id="math">
 		</div>
-		
-		<div>
-			<input type="checkbox" name="ch2" value="1st chkbox">
-			<input type="checkbox" name="ch2" value="2nd chkbox">
-			<input type="checkbox" name="ch2" value="3rd chkbox">
-		</div>
-		
-		<div>
-			<textarea rows="" cols="" name="textArea"></textarea>
-		</div>
-		
+
 		<div>
 			<input type="submit" value="등록">
 			<button type="submit">작성</button>

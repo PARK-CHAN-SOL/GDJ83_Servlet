@@ -1,5 +1,6 @@
 package com.sol.home.student;
 
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,22 +49,20 @@ public class StudentController {
 				if (method.toUpperCase().equals("POST")) {
 					StudentDTO sDTO = new StudentDTO();
 					String name = request.getParameter("name");
-					int num = Integer.parseInt(request.getParameter("num"));
-					double avg = Double.parseDouble(request.getParameter("avg"));
-					System.out.println(name + num + avg);
+					Calendar ca = Calendar.getInstance();
+					long num = ca.getTimeInMillis();
+					int kor = Integer.parseInt(request.getParameter("kor"));
+					int eng = Integer.parseInt(request.getParameter("eng"));
+					int math = Integer.parseInt(request.getParameter("math"));
+				
 					sDTO.setName(name);
 					sDTO.setNum(num);
-					sDTO.setAvg(avg);
+					sDTO.setKor(kor);
+					sDTO.setEng(eng);
+					sDTO.setMath(math);
 
-					System.out.println(request.getParameter("ch"));
-					System.out.println(request.getParameter("mobile"));
-
-					for (String ch2 : request.getParameterValues("ch2")) {
-						System.out.println(ch2);
-					}
-
-					System.out.println(request.getParameter("textArea"));
-
+					studentService.makeStudent(sDTO);
+					
 					action.setFlag(false);
 					action.setPath("./list");
 				} else {
@@ -75,7 +74,7 @@ public class StudentController {
 
 			} else if (spltUri[2].equals("detail")) {
 				StudentDTO sDTO = new StudentDTO();
-				sDTO.setNum(Integer.parseInt(request.getParameter("num")));
+				sDTO.setNum(Long.parseLong(request.getParameter("num")));
 				sDTO = studentService.getDetail(sDTO);
 				if(sDTO != null) {
 					request.setAttribute("sDTO", sDTO);

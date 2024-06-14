@@ -21,14 +21,13 @@ public class StudentService {
 		}
 	}
 	
-	public StudentDTO makeStudent() {
-		StudentDTO studentDTO = new StudentDTO();
-		
-		studentDTO.setName("sol");
-		studentDTO.setAvg(4.28);
-		studentDTO.setNum(1);
-		
-		return studentDTO;
+	public void makeStudent(StudentDTO sDTO) {
+		try {
+			sDAO.makeStudent(sDTO);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public StudentDTO getDetail(StudentDTO sDTO) {
@@ -41,4 +40,5 @@ public class StudentService {
 			return null;
 		}
 	}
+	
 }

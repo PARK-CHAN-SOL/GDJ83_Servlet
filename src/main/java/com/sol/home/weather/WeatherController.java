@@ -53,8 +53,16 @@ public class WeatherController {
 				}
 
 			} else if (spltUri[2].equals("delete")) {
-				action.setPath("/WEB-INF/views/weather/delete.jsp");
-
+				if (method.equals("POST")) {
+					action.setPath("/weather/list");
+					action.setFlag(false);
+					WeatherDTO wDTO = new WeatherDTO();
+					wDTO.setNum(Long.parseLong(request.getParameter("num")));
+					ws.delete(wDTO);
+				} else {
+					action.setPath("/weather/list");
+					action.setFlag(false);
+				}
 			} else if (spltUri[2].equals("detail")) {
 				//
 				String num = request.getParameter("num");
@@ -70,7 +78,23 @@ public class WeatherController {
 					action.setPath("/WEB-INF/views/commons/message.jsp");
 				}
 
-			} else {
+			} else if (spltUri[2].equals("update")){
+				if(method.equals("POST")){
+					WeatherDTO wDTO = new WeatherDTO();
+					wDTO.setNum(Long.parseLong(request.getParameter("num")));
+					wDTO.setCity(request.getParameter("city"));
+					wDTO.setGion(Double.parseDouble(request.getParameter("gion")));
+					wDTO.setStatus(request.getParameter("status"));
+					wDTO.setHumidity(Integer.parseInt(request.getParameter("humidity")));
+					ws.update(wDTO);
+				} else {
+					WeatherDTO wDTO = new WeatherDTO();
+					wDTO.setNum(Long.parseLong(request.getParameter("num")));
+					wDTO = ws.getDetail(wDTO);
+					request.setAttribute("wDTO", wDTO);
+					action.setPath("/WEB-INF/views/weather/update.jsp");					
+				}
+			}else {
 
 			}
 

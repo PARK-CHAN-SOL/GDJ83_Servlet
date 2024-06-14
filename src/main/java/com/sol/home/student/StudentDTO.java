@@ -3,7 +3,7 @@ package com.sol.home.student;
 public class StudentDTO {
 	private String name;
 	private double avg;
-	private int num;
+	private long num;
 	private int kor;
 	private int eng;
 	private int math;
@@ -21,10 +21,10 @@ public class StudentDTO {
 	public void setAvg(double avg) {
 		this.avg = avg;
 	}
-	public int getNum() {
+	public long getNum() {
 		return num;
 	}
-	public void setNum(int num) {
+	public void setNum(long num) {
 		this.num = num;
 	}
 	public int getKor() {

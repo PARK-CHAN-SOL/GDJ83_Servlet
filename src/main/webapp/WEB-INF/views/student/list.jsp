@@ -43,6 +43,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<a href="/student/add">학생정보추가</a>
 	<div>
 		
 	</div>
