@@ -89,19 +89,30 @@ public class StudentDAO {
 		FileWriter fw = new FileWriter(file,false);
 		int total = sDTO.getKor() + sDTO.getEng() + sDTO.getMath();
 		double avg = total / 3.0;
+		sDTO.setTotal(total);
+		sDTO.setAvg(avg);
 		StringBuffer sb = new StringBuffer();
-		for(StudentDTO sDTOtmp : sDTOs) {
-			if(sDTOtmp.getNum() == sDTO.getNum()) {
-				sDTOtmp.setName(sDTO.getName());
-				sDTOtmp.setKor(sDTO.getKor());
-				sDTOtmp.setEng(sDTO.getEng());
-				sDTOtmp.setMath(sDTO.getMath());
-				sDTOtmp.setTotal(total);
-				sDTOtmp.setAvg(avg);
+//		for(StudentDTO sDTOtmp : sDTOs) {
+//			if(sDTOtmp.getNum() == sDTO.getNum()) {
+//				sDTOtmp.setName(sDTO.getName());
+//				sDTOtmp.setKor(sDTO.getKor());
+//				sDTOtmp.setEng(sDTO.getEng());
+//				sDTOtmp.setMath(sDTO.getMath());
+//				sDTOtmp.setTotal(total);
+//				sDTOtmp.setAvg(avg);
+//			}
+//			sb.append(sDTOtmp.getNum()).append(",").append(sDTOtmp.getName()).append(",")
+//			.append(sDTOtmp.getKor()).append(",").append(sDTOtmp.getEng()).append(",").append(sDTOtmp.getMath()).append(",")
+//			.append(sDTOtmp.getTotal()).append(",").append(sDTOtmp.getAvg()).append("\n");
+//		}
+		for(int i = 0; i < sDTOs.size(); i++) {
+			if(sDTO.getNum() == sDTOs.get(i).getNum()) {
+				sDTOs.set(i, sDTO);
 			}
-			sb.append(sDTOtmp.getNum()).append(",").append(sDTOtmp.getName()).append(",")
-			.append(sDTOtmp.getKor()).append(",").append(sDTOtmp.getEng()).append(",").append(sDTOtmp.getMath()).append(",")
-			.append(sDTOtmp.getTotal()).append(",").append(sDTOtmp.getAvg()).append("\n");
+			sb.append(sDTOs.get(i).getNum()).append(",").append(sDTOs.get(i).getName()).append(",")
+			.append(sDTOs.get(i).getKor()).append(",").append(sDTOs.get(i).getEng()).append(",").append(sDTOs.get(i).getMath()).append(",")
+			.append(sDTOs.get(i).getTotal()).append(",").append(sDTOs.get(i).getAvg()).append("\n");
+		
 		}
 		fw.write(sb.toString());
 		fw.close();
